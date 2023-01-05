@@ -18,6 +18,7 @@ jobs:
   ## Runs Nx build, lint, and test targets for projects affected by head branch
   ci-preflight:
     name: CI Preflight
+    runs-on: ubuntu-latest
 
     steps:
       - name: 🧪 Unit-Test affected projects
