@@ -13,8 +13,11 @@ jobs:
   extract-coverage:
     runs-on: ubuntu-latest
     steps:
-    - name: Print SHA
-      run: echo {{github.event.before}}
+    - name: get the sha
+      run: |
+        echo "$GITHUB_CONTEXT"| jq '.event.commits[].id' | tail -2 | head -1 |sed 's/\"//g'
+      env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
     - name: Download coverage artifact
       uses: actions/download-artifact@v3
       with:
