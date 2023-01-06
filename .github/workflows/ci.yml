@@ -8,7 +8,7 @@ on:
       - reopened
     branches:
       - master
-      - 'release/*'
+      - 'feature/*'
 
   workflow_dispatch:
 
@@ -33,5 +33,5 @@ jobs:
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
-        name: code-coverage-report
+        name: code-coverage-report-${{github.sha}}
         path: coverage/test/coverage-summary.json
