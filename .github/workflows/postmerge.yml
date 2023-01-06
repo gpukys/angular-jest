@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Print SHA
-      run: echo {{github.sha}}
+      run: echo {{github.event.before}}
     - name: Download coverage artifact
       uses: actions/download-artifact@v3
       with:
-        name: code-coverage-report-${{github.sha}}
+        name: code-coverage-report-${{github.event.before}}
     - name: Run consoomer
       run: node coverage-consoomer.js coverage/test/coverage-summary.json
