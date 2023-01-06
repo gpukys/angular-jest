@@ -17,10 +17,21 @@ jobs:
   
   ## Runs Nx build, lint, and test targets for projects affected by head branch
   ci-preflight:
-    name: CI Preflight
     runs-on: ubuntu-latest
-
     steps:
-      - name: 🧪 Unit-Test affected projects
-        run: |-
-          npm run test
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage/test/coverage-summary.json
