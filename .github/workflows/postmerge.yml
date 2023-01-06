@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+
+  
+  ## Runs Nx build, lint, and test targets for projects affected by head branch
+  extract-coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print SHA
+      run: echo {{github.sha}}
+    - name: Download coverage artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: code-coverage-report-{{github.sha}}
+    - name: Run consoomer
+      run: node coverage-consoomer.js coverage/test/coverage-summary.json

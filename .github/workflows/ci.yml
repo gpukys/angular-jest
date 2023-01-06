@@ -33,5 +33,5 @@ jobs:
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
-        name: code-coverage-report
-        path: coverage/test/coverage-summary-${{github.sha}}}.json
+        name: code-coverage-report-${{github.sha}}
+        path: coverage/test/coverage-summary.json
